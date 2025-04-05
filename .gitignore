@@ -1,0 +1,7 @@
+./file-compressor/target
+./file-compressor/Cargo.lock
+
+## run to clear untrack cargo lock and target before pushing to gh
+# git rm --cached Cargo.lock 
+# git rm --cached target 
+
