@@ -5,3 +5,18 @@
 # git rm --cached Cargo.lock 
 # git rm --cached target 
 
+# Rust build artifacts 
+**/target/
+**/exercises/progress.db
+
+# OS files
+**/.DS_Store
+**/Thumbs.db
+
+# IDE/editor files
+**/.idea/
+**/.vscode/
+
+# Backup files
+**/*~
+**/#*#
