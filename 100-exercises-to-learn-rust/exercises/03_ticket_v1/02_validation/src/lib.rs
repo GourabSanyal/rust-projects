@@ -18,7 +18,30 @@ impl Ticket {
     // as well as some `String` methods. Use the documentation of Rust's standard library
     // to find the most appropriate options -> https://doc.rust-lang.org/std/string/struct.String.html
     fn new(title: String, description: String, status: String) -> Self {
-        todo!();
+        // todo!();
+
+        if title.is_empty() {
+            panic!("title can not be");
+        }
+
+        if title.len() > 50 {
+            panic!("title can not be longer than 50 bytes");
+        }
+
+
+        if description.is_empty() {
+            panic!("description can not be empty");
+        }
+
+        if description.len() > 50 {
+            panic!("description can not be longer than 500 bytes");
+        }
+
+
+        if status != "To-Do" && status != "In Progress" && status != "Done" {
+            panic!("Onlt 'To-Do', 'In Progres' and 'Done' is allowed")
+        };
+
         Self {
             title,
             description,
