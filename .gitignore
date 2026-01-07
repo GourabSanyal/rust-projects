@@ -1,13 +1,19 @@
-./file-compressor/target
-./file-compressor/Cargo.lock
-
-## run to clear untrack cargo lock and target before pushing to gh
-# git rm --cached Cargo.lock 
-# git rm --cached target 
-
-# Rust build artifacts 
+# Rust build artifacts (all directories and subdirectories)
 **/target/
-**/exercises/progress.db
+**/Cargo.lock
+**/*.rs.bk
+**/*.pdb
+
+# Debug and release builds
+**/debug/
+**/release/
+
+# Rust-specific temporary files
+**/*.rlib
+**/*.rmeta
+**/*.so
+**/*.dylib
+**/*.dll
 
 # OS files
 **/.DS_Store
@@ -16,7 +22,23 @@
 # IDE/editor files
 **/.idea/
 **/.vscode/
+**/*.swp
+**/*.swo
+**/*~
 
 # Backup files
-**/*~
 **/#*#
+**/.#*
+
+# Environment files
+**/.env
+**/.env.local
+
+# Database files (for your CRUD app)
+**/*.db
+**/*.sqlite
+**/*.sqlite3
+**/progress.db
+
+# Logs
+**/*.log
