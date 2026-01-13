@@ -3,9 +3,7 @@ mod  users;
 
 use routes::api_router;
 use std::env;
-use dotenv::dotenv;
 use sqlx::PgPool;
-use axum::Router;
 
 #[tokio::main]
 async fn main() {
