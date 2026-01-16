@@ -1,12 +1,14 @@
 use axum::{Router, routing::{get, post, put, delete}};
-use crate::users::handlers::{root, create, all_users, update, delete_user};
+use crate::users::handlers::{root_path, create, 
+    // all_users, update, delete_user
+};
 use sqlx::PgPool;
 
 pub fn user_router() -> Router<PgPool> {
     Router::new()
-        .route("/", get(root))
+        .route("/", get(root_path))
         .route("/create", post(create))
-        .route("/getallusers", get(all_users))
-        .route("/update/:id", put(update))
-        .route("/delete/:id", delete(delete_user))
+        // .route("/getallusers", get(all_users))
+        // .route("/update/:id", put(update))
+        // .route("/delete/:id", delete(delete_user))
 }
