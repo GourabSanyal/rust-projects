@@ -4,9 +4,9 @@
 //   private functions or private static methods for that.
 
 pub struct Ticket {
-    title: String,
-    description: String,
-    status: String,
+    mut title: &String,
+    mut description: &String,
+    mut status: &String,
 }
 
 impl Ticket {
@@ -44,6 +44,10 @@ impl Ticket {
 
     pub fn status(&self) -> &String {
         &self.status
+    }
+
+    pub fn set_title(&mut self title) -> &String {
+        
     }
 }
 
