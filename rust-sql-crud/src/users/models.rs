@@ -1,9 +1,10 @@
 use serde::{Deserialize, Serialize};
 use sqlx::FromRow;
+use uuid::Uuid;
 
 #[derive(Debug, FromRow, Deserialize, Serialize)]
 pub struct User {
-    pub id: i32,
+    pub id: String,
     pub name: String,
     pub email: String,
     pub password: String
@@ -17,7 +18,7 @@ pub enum ApiResponse<T> {
 
 #[derive(Serialize)]
 pub struct UserResponse {
-    pub id: i32,
+    pub id: String,
     pub name: String,
     pub email: String
 }
@@ -29,7 +30,7 @@ pub struct UserResponse {
 impl From<super::models::User> for UserResponse {
     fn from (user: super::models::User) -> Self {
         Self {
-            id: user.id,
+            id: user.id.to_string(),
             name: user.name,
             email: user.email
         }
@@ -45,7 +46,7 @@ pub struct CreateUser {
 
 #[derive(Debug, Serialize)]
 pub struct PublicUser{
-    pub id: i32,
+    pub id: String,
     pub name: String,
     pub email: String
 }
@@ -53,7 +54,7 @@ pub struct PublicUser{
 impl From<super::models::User> for PublicUser {
     fn from (user: super::models::User) -> Self {
         Self {
-            id: user.id,
+            id: user.id.to_string(),
             name: user.name,
             email: user.email
         }
