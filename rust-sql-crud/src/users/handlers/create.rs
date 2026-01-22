@@ -2,11 +2,6 @@ use axum::{body::Body, Json, http::StatusCode, extract::State};
 use sqlx::PgPool;
 use crate::users::models::{ApiResponse, UserResponse, CreateUser};
 
-pub async fn root() -> (StatusCode, Json<Vec<String>>) {
-    let data =  vec!["Welcome to CRUD built using Rust and SQL".to_string()];
-    (StatusCode::OK, Json(data))
-}
-
 pub async fn create(
     State(pool): State<PgPool>, 
     Json(payload): Json<CreateUser>
@@ -15,7 +10,7 @@ pub async fn create(
     let result = sqlx::query!(
         "INSERT INTO users (name, email, password)
          VALUES ($1, $2, $3)
-         RETURNING ID
+         RETURNING id
         ",
         payload.name,
         payload.email,
@@ -27,7 +22,7 @@ pub async fn create(
     match result {
         Ok(record) => { //record gets us the ID from the DB query 'RETURNING ID'
             let response = UserResponse {
-                id: record.id,
+                id: record.id.to_string(),
                 name: payload.name,
                 email: payload.email
             };
@@ -39,10 +34,10 @@ pub async fn create(
                 })
             )
         },
-        Err(_e) => {
+        Err(e) => {
             (StatusCode::INTERNAL_SERVER_ERROR,
                 Json(ApiResponse::Error{
-                    message: "Failed to update the user".to_string()
+                    message: format!("Failed to create user: {}", e)
                 })
             )
         }
