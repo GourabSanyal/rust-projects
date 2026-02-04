@@ -37,29 +37,32 @@ impl From<u8> for SaturatingU16 {
 
 impl From<&u16> for SaturatingU16 {
     fn from(value: &u16) -> Self{
-        SaturatingU16 {value: *value}
+        (*value).into()
     }
 }
 
 impl From<&u8> for SaturatingU16 {
     fn from(value: &u8) -> Self{
-        SaturatingU16 {value: (*value).into()}
+        (*value).into()
     }
 }
 
 impl Add for SaturatingU16{
-    type Output = Self;
+    type Output = SaturatingU16;
 
     fn add(self, rhs: Self) -> Self {
-        Self::from(self.value.saturating_add(rhs.value))
+        self + rhs.value
     }
 }
 
 impl Add<u16> for SaturatingU16{
-    type Output = u16;
+    type Output = Self;
 
     fn add(self, rhs: u16) -> Self::Output {
-        self.value.saturating_add(rhs)
+        let sum = self.value.saturating_add(rhs);
+        Self {
+            value: sum,
+        }
     }
 }
 
@@ -67,7 +70,7 @@ impl Add<&u16> for SaturatingU16{
     type Output = SaturatingU16;
 
     fn add(self, rhs: &u16) -> Self::Output {
-        Self::from(self.value.saturating_add(*rhs))
+        self + *rhs
     }
 }
 
@@ -75,7 +78,13 @@ impl Add<&SaturatingU16> for SaturatingU16{
     type Output = SaturatingU16;
 
     fn add(self, rhs: &SaturatingU16) -> Self::Output {
-        Self::from(self.value.saturating_add(rhs.value))
+       self + *rhs 
+    }
+}
+
+impl PartialEq<u16> for SaturatingU16{
+    fn eq(&self, other: &u16) -> bool {
+        self.value == *other
     }
 }
 
