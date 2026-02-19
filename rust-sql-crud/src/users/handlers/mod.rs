@@ -7,3 +7,5 @@ pub use root_path::*;
 pub mod all_users;
 pub use all_users::*;
 
+pub mod delete_user;
+pub use delete_user::*;
