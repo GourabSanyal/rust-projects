@@ -9,3 +9,6 @@ pub use all_users::*;
 
 pub mod delete_user;
 pub use delete_user::*;
+
+pub mod update_user;
+pub use update_user::*;
