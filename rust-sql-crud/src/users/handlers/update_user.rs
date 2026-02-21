@@ -5,11 +5,11 @@ use axum::{
     extract::State
 };
 use sqlx::PgPool;
-use crate::users::models::{ApiResponse, UserResponse}
+use crate::users::models::{ApiResponse, UserResponse, CreateUser}
 use uuid::Uuid;
 
-pub fn update_user(
-    State(&pool) : State<PgPool>,
+pub async fn update_user(
+    State(pool) : State<PgPool>,
     Path(id): Path<uuid::Uuid>,
     Json(payload): Json<CreateUser>
 ) -> (StatusCode, Json<ApiResponse<UserResponse>>){
@@ -21,4 +21,16 @@ pub fn update_user(
     )
     .fetch_one(&pool)
     .await;
+
+    match result {
+        Ok(recors) => {
+            
+        },
+        Err(e) => {
+            (StatusCode::INTERNAL_SERVER_ERROR,
+                Json(ApiResponse::Error{
+                    message: format!("Failed to update user details {}", e)
+                }))
+        }
+    }
 }
