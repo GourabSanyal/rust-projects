@@ -1,4 +1,4 @@
-use axum::{body::Body, Json, http::StatusCode, extract::State};
+use axum::{Json, http::StatusCode, extract::State};
 use sqlx::PgPool;
 use crate::users::models::{ApiResponse, UserResponse, CreateUser};
 
